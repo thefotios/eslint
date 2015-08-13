@@ -13,22 +13,20 @@ This rule is aimed to flag invalid/missing `super()` calls.
 The following patterns are considered warnings:
 
 ```js
+/*eslint constructor-super: 1*/
+
 class A {
     constructor() {
         super(); // unexpected `super()`.
     }
 }
-```
 
-```js
 class A extends null {
     constructor() {
         super(); // unexpected `super()`.
     }
 }
-```
 
-```js
 class A extends B {
     constructor() { } // requires `super()`.
 }
@@ -37,18 +35,16 @@ class A extends B {
 The following patterns are not considered warnings:
 
 ```js
+/*eslint constructor-super: 2*/
+
 class A {
     constructor() { }
 }
-```
 
-```js
 class A extends null {
     constructor() { }
 }
-```
 
-```js
 class A extends B {
     constructor() {
         super();
@@ -58,4 +54,4 @@ class A extends B {
 
 ## When Not to Use It
 
-If you don't want to be notified about invalid/missing `super()` callings in constructors, you can safely disable this rule.
+If you don't want to be notified about invalid/missing `super()` callings in constructors, you can safely keep this rule disabled.

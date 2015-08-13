@@ -41,20 +41,29 @@ a => {}
 
 ### Options
 
-The rule takes one option, a string, which could be either "always" or "as-needed". The default is "always".
+The rule takes one option, a string:
+
+* `"always"` enforces parentheses always (Default)
+* `"as-needed"` enforces parantheses only when strictly necessary
+
+#### Usage
 
 You can set the option in configuration like this:
 
+```json
 "arrow-parens": [2, "always"]
+```
 
 #### "always"
 
 When the rule is set to `"always"` the following patterns are considered warnings:
 
 ```js
-a => {}
-a => a
-a => {\n}
+/*eslint arrow-parens: [1, "always"]*/
+
+a => {};
+a => a;
+a => {'\n'};
 a.then(foo => {});
 a.then(foo => a);
 a(foo => { if (true) {}; });
@@ -63,10 +72,12 @@ a(foo => { if (true) {}; });
 The following patterns are not warnings:
 
 ```js
-() => {}
-(a) => {}
-(a) => a
-(a) => {\n}
+/*eslint arrow-parens: [2, "always"]*/
+
+() => {};
+(a) => {};
+(a) => a;
+(a) => {'\n'}
 a.then((foo) => {});
 a.then((foo) => { if (true) {}; });
 ```
@@ -125,9 +136,11 @@ var f = (a) => b ? c: d;
 When the rule is set to `"as-needed"` the following patterns are considered warnings:
 
 ```js
-(a) => {}
-(a) => a
-(a) => {\n}
+/*eslint arrow-parens: [1, "as-needed"]*/
+
+(a) => {};
+(a) => a;
+(a) => {'\n'};
 a.then((foo) => {});
 a.then((foo) => a);
 a((foo) => { if (true) {}; });
@@ -136,14 +149,16 @@ a((foo) => { if (true) {}; });
 The following patterns are not warnings:
 
 ```js
-() => {}
-a => {}
-a => a
-a => {\n}
+/*eslint arrow-parens: [2, "as-needed"]*/
+
+() => {};
+a => {};
+a => a;
+a => {'\n'};
 a.then(foo => {});
 a.then(foo => { if (true) {}; });
-(a, b, c) => a
-(a = 10) => a
-([a, b]) => a
-({a, b}) => a
+(a, b, c) => a;
+(a = 10) => a;
+([a, b]) => a;
+({a, b}) => a;
 ```

@@ -31,22 +31,26 @@ This rule enforces a style where it requires to have a getter for every object w
 
 ### Options
 
-`getWithoutSet` set to `true` will warn for getters without setters (Default `false`).
-`setWithoutGet` set to `true` will warn for setters without getters (Default `true`).
+This rule takes an object argument with `"getWithoutSet"` and `"setWithoutGet"` properties, each with a Boolean value.
+
+* `"getWithoutSet"` set to `true` will warn for getters without setters (Default `false`).
+* `"setWithoutGet"` set to `true` will warn for setters without getters (Default `true`).
 
 #### Usage
 
-By default `setWithoutGet` option is always set to `true`.
+You can set the rule configuration like this:
 
-```js
-{
-    accessor-pairs: [2, {getWithoutSet: true}]
-}
+```json
+"accessor-pairs": [2, { getWithoutSet: true }]
 ```
 
-The following patterns are considered warnings by default:
+#### setWithoutGet
+
+By default, the `setWithoutGet` option is set to `true`. The following patterns are considered warnings by default:
 
 ```js
+/*eslint accessor-pairs: 1*/
+
 var o = {
     set a(value) {
         this.val = value;
@@ -64,6 +68,8 @@ Object.defineProperty(o, 'c', {
 The following patterns are not considered warnings by default:
 
 ```js
+/*eslint accessor-pairs: 2*/
+
 var o = {
     set a(value) {
         this.val = value;
@@ -85,9 +91,13 @@ Object.defineProperty(o, 'c', {
 
 ```
 
+#### getWithoutSet
+
 The following patterns are considered warnings with option `getWithoutSet` set:
 
 ```js
+/*eslint accessor-pairs: [1, { getWithoutSet: true }]*/
+
 var o = {
     set a(value) {
         this.val = value;
@@ -118,6 +128,7 @@ Object.defineProperty(o, 'c', {
 The following patterns are not considered warnings by option `getWithoutSet` set:
 
 ```js
+/*eslint accessor-pairs: [2, { getWithoutSet: true }]*/
 var o = {
     set a(value) {
         this.val = value;
@@ -141,7 +152,7 @@ Object.defineProperty(o, 'c', {
 
 ## When Not To Use It
 
-You can turn this rule off if you are not concerned with the presence of setters or getters on objects.
+You can leave this rule off if you are not concerned with the presence of setters or getters on objects.
 
 ## Further Reading
 

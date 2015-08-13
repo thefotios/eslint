@@ -24,6 +24,8 @@ This rule is aimed at ensuring all `return` statements either specify a value or
 The following patterns are considered warnings:
 
 ```js
+/*eslint consistent-return: 1*/
+
 function doSomething(condition) {
 
     if (condition) {
@@ -46,6 +48,8 @@ function doSomething(condition) {
 The following patterns are considered okay and do not cause warnings:
 
 ```js
+/*eslint consistent-return: 2*/
+
 function doSomething(condition) {
 
     if (condition) {
@@ -58,4 +62,4 @@ function doSomething(condition) {
 
 ## When Not To Use It
 
-If you want to allow functions to have different `return` behavior depending on code branching, then it is safe to disable this rule.
+Do not enable this rule if you want to allow functions to have different `return` behavior depending on code branching.

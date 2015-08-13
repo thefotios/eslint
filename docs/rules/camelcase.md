@@ -8,24 +8,23 @@ This rule looks for any underscores (`_`) located within the source code. It ign
 
 ### Options
 
-This rule accepts a single options argument with the following defaults:
+This rule accepts a single options argument named `"properties"`, which can have the following values:
 
-```js
-{
-    "rules": {
-        "camelcase": [2, {"properties": "always"}]
-    }
-}
+* `"always"` checks all property names (Default)
+* `"never"` does not check property names at all
+
+#### Usage
+
+You can set the rule configuration like this:
+
+```json
+"camelcase": [2, {"properties": "always"}]
 ```
-
-`Properties` can have the following values:
-
-1. `always` is the default and checks all property names
-2. `never` does not check property names at all
 
 The following patterns are considered warnings:
 
 ```js
+/*eslint camelcase: 1*/
 var my_favorite_color = "#112C85";
 
 function do_something() {
@@ -44,6 +43,7 @@ var obj = {
 The following patterns are considered okay and do not cause warnings:
 
 ```js
+/*eslint camelcase: 2*/
 var myFavoriteColor   = "#112C85";
 var _myFavoriteColor  = "#112C85";
 var myFavoriteColor_  = "#112C85";
@@ -52,8 +52,12 @@ var foo = bar.baz_boom;
 var foo = { qux: bar.baz_boom };
 
 obj.do_something();
+```
 
+
+```js
 /*eslint camelcase: [2, {properties: "never"}]*/
+
 var obj = {
     my_pref: 1
 };
@@ -61,4 +65,4 @@ var obj = {
 
 ## When Not To Use It
 
-If you have established coding standards using a different naming convention (separating words with underscores), turn this rule off.
+If you have established coding standards using a different naming convention (separating words with underscores), don't turn this rule on.

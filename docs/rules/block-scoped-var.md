@@ -16,9 +16,24 @@ function doSomething() {
 
 This rule aims to reduce the usage of variables outside of their binding context and emulate traditional block scope from other languages. This is to help newcomers to the language avoid difficult bugs with variable hoisting.
 
+### Options
+
+This rule has no options other than the severity (`0`, `1`, or `2`).
+
+#### Usage
+
+You can set the rule configuration like this:
+
+```json
+"block-scoped-var": 2
+```
+
+
 The following patterns are considered warnings:
 
 ```js
+/*eslint block-scoped-var: 1*/
+
 function doSomething() {
     if (true) {
         var build = true;
@@ -29,6 +44,8 @@ function doSomething() {
 ```
 
 ```js
+/*eslint block-scoped-var: 1*/
+
 function doAnother() {
     try {
         var build = 1;
@@ -41,6 +58,8 @@ function doAnother() {
 The following patterns are not warnings:
 
 ```js
+/*eslint block-scoped-var: 2*/
+
 function doSomething() {
     var build;
 

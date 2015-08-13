@@ -23,9 +23,23 @@ This rule is aimed at ensuring that callbacks used outside of the main function 
 preceding a `return` statement. This rules decides what is a callback based on the name of the function being called.
 By default the rule treats `cb`, `callback`, and `next` as callbacks.
 
+### Options
+
+The rule takes a single option, which is an array of possible callback names.
+
+#### Usage
+
+You can set the rule configuration like this:
+
+```json
+"callback-return": [2, ["callback", "cb", "next"]]
+```
+
 The following patterns are considered warnings:
 
 ```js
+/*eslint callback-return: 1*/
+
 function foo() {
     if (err) {
         callback(err);
@@ -37,20 +51,14 @@ function foo() {
 The following patterns are not considered warnings:
 
 ```js
+/*eslint callback-return: 2*/
+
 function foo() {
     if (err) {
         return callback(err);
     }
     callback();
 }
-```
-
-### Options
-
-The rule takes a single option, which is an array of possible callback names.
-
-```json
-callback-return: [2, ["callback", "cb", "next"]]
 ```
 
 ### Gotchas
@@ -65,6 +73,8 @@ Here is a case where we pass the callback to the `setTimeout` function. Our rule
 it is likely a mistake.
 
 ```js
+/*eslint callback-return: 1*/
+
 function foo(callback) {
     if (err) {
         setTimeout(callback, 0); // this is bad, but WILL NOT warn
@@ -80,6 +90,8 @@ function expression, we won't be able to detect that you're calling the callback
 we won't warn.
 
 ```js
+/*eslint callback-return: 1*/
+
 function foo(callback) {
     if (err) {
         process.nextTick(function() {
@@ -96,6 +108,8 @@ Here is a case where you're doing the right thing in making sure to only `callba
 difficulty in determining what you're doing, this rule does not allow for this pattern.
 
 ```js
+/*eslint callback-return: 1*/
+
 function foo(callback) {
     if (err) {
         callback(err); // this is fine, but WILL warn

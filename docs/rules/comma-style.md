@@ -12,7 +12,12 @@ This rule is aimed at enforcing a particular comma style in JavaScript. As such,
 
 ### Options
 
-The rule takes an option, a string, which could be either "last" or "first". The default is "last".
+The rule takes an option, a string
+
+* `"last"` This option requires that the comma be placed after and be in the same line as the variable declaration, object property and array element. (Default)
+* `"first"` This option requires that the comma be placed before and be in the same line as the variable declaration, object property and array element.
+
+#### Usage
 
 You can set the style in configuration like this:
 
@@ -22,11 +27,10 @@ You can set the style in configuration like this:
 
 #### "last"
 
-This is the default setting for this rule. This option requires that the comma be placed after and be in the same line as the variable declaration, object property and array element.
-
 While using this setting, the following patterns are considered warnings:
 
 ```js
+/*eslint comma-style: [1, "last"]*/
 
 var foo = 1
 , //lone comma
@@ -52,6 +56,7 @@ function bar() {
 The following patterns are not warnings:
 
 ```js
+/*eslint comma-style: [2, "last"]*/
 
 var foo = 1, bar = 2;
 
@@ -74,11 +79,10 @@ function bar() {
 
 #### "first"
 
-This option requires that the comma be placed before and be in the same line as the variable declaration, object property and array element.
-
 While using this setting, the following patterns are considered warnings:
 
 ```js
+/*eslint comma-style: [1, "first"]*/
 
 var foo = 1,
     bar = 2;
@@ -100,6 +104,7 @@ function bar() {
 The following patterns are not warnings:
 
 ```js
+/*eslint comma-style: [2, "first"]*/
 
 var foo = 1, bar = 2;
 
@@ -124,34 +129,36 @@ function bar() {
 
 Exceptions of the following nodes may be passed in order to tell ESLint to ignore nodes of certain types.
 
-```text
-ArrayExpression,
-ObjectExpression,
-VariableDeclaration
-```
+* `"ArrayExpression"`
+* `"ObjectExpression"`
+* `"VariableDeclaration"`
+
 
 An example use case is if a user wanted to only enforce comma style in var statements.
-The following code would lint.
+
+The following is considered a warning:
 
 ```js
-/* eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }] */
+/*eslint comma-style: [1, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }]*/
+
+var o = {},
+    a = [];
+```
+
+But the following would not be a warning:
+
+```js
+/*eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }]*/
+
 var o = {fst:1,
          snd: [1,
                2]}
   , a = [];
 ```
 
-Whereas the following would not.
-
-```js
-/* eslint comma-style: [2, "first", {exceptions: {ArrayExpression: true, ObjectExpression: true} }] */
-var o = {},
-    a = [];
-```
-
 ## When Not To Use It
 
-If your project will not be using one true comma style, turn this rule off.
+Do not use this rule if your project will not be using a consistent comma style.
 
 
 ## Further Reading

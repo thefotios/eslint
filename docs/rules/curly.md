@@ -3,14 +3,14 @@
 JavaScript allows the omission of curly braces when a block contains only one statement. However, it is considered by many to be best practice to _never_ omit curly braces around blocks, even when they are optional, because it can lead to bugs and reduces code clarity. So the following:
 
 ```js
-if (foo) return;
+if (foo) foo++;
 ```
 
 Can be rewritten as:
 
 ```js
 if (foo) {
-    return;
+    foo++;
 }
 ```
 
@@ -23,7 +23,9 @@ This rule is aimed at preventing bugs and increasing code clarity by ensuring th
 The following patterns are considered warnings:
 
 ```js
-if (foo) return;
+/*eslint curly: 1*/
+
+if (foo) foo++;
 
 while (bar)
     baz();
@@ -36,8 +38,10 @@ if (foo) {
 The following patterns are not considered warnings:
 
 ```js
+/*eslint curly: 2*/
+
 if (foo) {
-    return;
+    foo++;
 }
 
 while (bar) {
@@ -53,6 +57,8 @@ if (foo) {
 
 ### Options
 
+#### multi
+
 By default, this rule warns whenever `if`, `else`, `for`, `while`, or `do` are used without block statements as their body. However, you can specify that block statements should be used only when there are multiple statements in the block and warn when there is only one statement in the block. To do so, configure the rule as:
 
 ```json
@@ -62,13 +68,15 @@ curly: [2, "multi"]
 With this configuration, the rule will warn for these patterns:
 
 ```js
+/*eslint curly: [1, "multi"]*/
+
 if (foo) {
-    return;
+    foo++;
 }
 
 if (foo) bar();
 else {
-    return;
+    foo++;
 }
 
 while (true) {
@@ -83,7 +91,9 @@ for (var i=0; i < items.length; i++) {
 It will not warn for these patterns:
 
 ```js
-if (foo) return;
+/*eslint curly: [2, "multi"]*/
+
+if (foo) foo++;
 else foo();
 
 while (true) {
@@ -91,6 +101,8 @@ while (true) {
     doSomethingElse();
 }
 ```
+
+#### multi-line
 
 Alternatively, you can relax the rule to allow brace-less single-line `if`, `else if`, `else`, `for`, `while`, or `do`, while still enforcing the use of curly braces for other instances. To do so, configure the rule as:
 
@@ -101,6 +113,8 @@ curly: [2, "multi-line"]
 With this configuration, the rule will warn for these patterns:
 
 ```js
+/*eslint curly: [1, "multi-line"]*/
+
 if (foo)
   doSomething();
 else
@@ -117,9 +131,11 @@ if (foo) foo(
 It will not warn for these patterns:
 
 ```js
-if (foo) return; else doSomething();
+/*eslint curly: [2, "multi-line"]*/
 
-if (foo) return;
+if (foo) foo++; else doSomething();
+
+if (foo) foo++;
 else if (bar) baz()
 else doSomething();
 
@@ -127,16 +143,18 @@ do something();
 while (foo);
 
 if (foo) {
-    return;
+    foo++;
 }
 
-if (foo) { return; }
+if (foo) { foo++; }
 
 while (true) {
     doSomething();
     doSomethingElse();
 }
 ```
+
+#### multi-or-nest
 
 You can use another configuration that forces brace-less `if`, `else if`, `else`, `for`, `while`, or `do` if their body contains only one single-line statement. And forces braces in all other cases.
 
@@ -147,8 +165,10 @@ curly: [2, "multi-or-nest"]
 With this configuration, the rule will warn for these patterns:
 
 ```js
-if (foo)
-    return {
+/*eslint curly: [1, "multi-or-nest"]*/
+
+if (!foo)
+    foo = {
         bar: baz,
         qux: foo
     };
@@ -160,7 +180,7 @@ while (true)
       doSomethingElse();
 
 if (foo) {
-    return;
+    foo++;
 }
 
 while (true) {
@@ -175,8 +195,10 @@ for (var i = 0; foo; i++) {
 It will not warn for these patterns:
 
 ```js
-if (foo) {
-    return {
+/*eslint curly: [2, "multi-or-nest"]*/
+
+if (!foo) {
+    foo = {
         bar: baz,
         qux: foo
     };
@@ -190,7 +212,7 @@ while (true) {
 }
 
 if (foo)
-    return;
+    foo++;
 
 while (true)
     doSomething();
@@ -207,4 +229,4 @@ curly: [2, "all"]
 
 ## When Not To Use It
 
-If you have no strict conventions about when to use block statements and when not to, you can safely disable this rule.
+If you have no strict conventions about when to use block statements and when not to, you can safely keep this rule disabled.

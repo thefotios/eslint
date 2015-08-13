@@ -36,39 +36,34 @@ Depending on your coding conventions, you can choose either option by specifying
 
 #### never
 
-When `"never"` is set, the following patterns are considered correct:
+When `"never"` is set, the following patterns will give a warning:
 
 ```js
-obj[foo]
-obj['foo']
-var x = {[b]: a}
-obj[foo[bar]]
-```
-
-The following patterns will warn:
-
-```js
+/*eslint computed-property-spacing: [1, "never"]*/
 obj[foo ]
 obj[ 'foo']
 var x = {[ b ]: a}
 obj[foo[ bar ]]
 ```
 
-#### always
-
-When `"always"` is used, the following patterns are considered correct:
+The following patterns are considered correct:
 
 ```js
-obj[ foo ]
-obj[ 'foo' ]
-var x = {[ b ]: a}
-obj[ foo[ bar ] ]
+/*eslint computed-property-spacing: [2, "never"]*/
 
+obj[foo]
+obj['foo']
+var x = {[b]: a}
+obj[foo[bar]]
 ```
 
-The following patterns will warn:
+#### always
+
+When `"always"` is used, the following patterns will give a warning:
 
 ```js
+/*eslint computed-property-spacing: [1, "always"]*/
+
 obj[foo]
 var x = {[b]: a}
 obj[ foo]
@@ -78,9 +73,22 @@ obj[foo[ bar ]]
 var x = {[ b]: a}
 ```
 
+The following patterns are considered correct:
+
+```js
+/*eslint computed-property-spacing: [2, "always"]*/
+
+obj[ foo ]
+obj[ 'foo' ]
+var x = {[ b ]: a}
+obj[ foo[ bar ] ]
+
+```
+
+
 ## When Not To Use It
 
-You can turn this rule off if you are not concerned with the consistency of computed properties.
+You should not enable this rule if you are not concerned with the consistency of computed properties.
 
 ## Related Rules
 

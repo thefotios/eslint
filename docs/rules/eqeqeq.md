@@ -18,11 +18,13 @@ This rule is aimed at eliminating the type-unsafe equality operators.
 The following patterns are considered warnings:
 
 ```js
-if (x == 42) { ... }
+/* eslint eqeqeq: 1 */
 
-if ("" == text) { ... }
+if (x == 42) { }
 
-if (obj.getStuff() != undefined) { ... }
+if ("" == text) { }
+
+if (obj.getStuff() != undefined) { }
 ```
 
 ### Options
@@ -44,6 +46,8 @@ You can specify this option using the following configuration:
 The following patterns are considered okay and do not cause warnings:
 
 ```js
+/* eslint eqeqeq: [2, "smart"] */
+
 typeof foo == 'undefined'
 'hello' != 'world'
 0 == 0
@@ -54,6 +58,8 @@ foo == null
 The following patterns are considered warnings with "smart":
 
 ```js
+/* eslint eqeqeq: [1, "smart"] */
+
 // comparing two variables requires ===
 a == b
 
@@ -78,12 +84,16 @@ You can specify this option using the following configuration:
 The following pattern is considered okay and do not cause warnings:
 
 ```js
+/* eslint eqeqeq: [2, "allow-null"] */
+
 foo == null
 ```
 
 The following patterns are considered warnings with "allow-null":
 
 ```js
+/* eslint eqeqeq: [1, "allow-null"] */
+
 bananas != 1
 typeof foo == 'undefined'
 'hello' != 'world'

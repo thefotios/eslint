@@ -20,7 +20,7 @@ separated from the adjacent value by a new line are excepted from this rule, as 
 
 ### Options
 
-There are two options for this rule:
+There are two string options for this rule:
 
 * `"always"` enforces a space inside of array brackets
 * `"never"` enforces no space inside of array brackets (default)
@@ -36,6 +36,8 @@ Depending on your coding conventions, you can choose either option by specifying
 When `"never"` is set, the following patterns are considered warnings:
 
 ```js
+/*eslint array-bracket-spacing: [1, "never"]*/
+
 var arr = [ 'foo', 'bar' ];
 var arr = ['foo', 'bar' ];
 var arr = [ ['foo'], 'bar'];
@@ -52,7 +54,8 @@ var [ ,,x, ] = z;
 The following patterns are not warnings:
 
 ```js
-// When options are [2, "never"]
+/*eslint array-bracket-spacing: [2, "never"]*/
+
 var arr = [];
 var arr = ['foo', 'bar', 'baz'];
 var arr = [['foo'], 'bar', 'baz'];
@@ -76,6 +79,8 @@ var [,,x,] = z;
 When `"always"` is used, the following patterns are considered warnings:
 
 ```js
+/*eslint array-bracket-spacing: [1, "always"]*/
+
 var arr = ['foo', 'bar'];
 var arr = ['foo', 'bar' ];
 var arr = [ ['foo'], 'bar' ];
@@ -95,6 +100,8 @@ var [,,x,] = z;
 The following patterns are not warnings:
 
 ```js
+/*eslint array-bracket-spacing: [2, "always"]*/
+
 var arr = [];
 var arr = [ 'foo', 'bar', 'baz' ];
 var arr = [ [ 'foo' ], 'bar', 'baz' ];
@@ -149,6 +156,8 @@ In each of the following examples, the `"always"` option is assumed.
 When `"singleValue"` is set to `false`, the following patterns are considered warnings:
 
 ```js
+/*eslint array-bracket-spacing: [1, "always", { singleValue: false }]*/
+
 var foo = [ 'foo' ];
 var foo = [ 'foo'];
 var foo = ['foo' ];
@@ -162,6 +171,8 @@ var foo = [ { 'foo': 'bar' } ];
 The following patterns are not warnings:
 
 ```js
+/*eslint array-bracket-spacing: [2, "always", { singleValue: false }]*/
+
 var foo = ['foo'];
 var foo = [1];
 var foo = [[ 1, 1 ]];
@@ -171,6 +182,8 @@ var foo = [{ 'foo': 'bar' }];
 When `"objectsInArrays"` is set to `false`, the following patterns are considered warnings:
 
 ```js
+/*eslint array-bracket-spacing: [1, "always", { objectsInArrays: false }]*/
+
 var arr = [ { 'foo': 'bar' } ];
 var arr = [ {
   'foo': 'bar'
@@ -180,6 +193,8 @@ var arr = [ {
 The following patterns are not warnings:
 
 ```js
+/*eslint array-bracket-spacing: [2, "always", { objectsInArrays: false }]*/
+
 var arr = [{ 'foo': 'bar' }];
 var arr = [{
   'foo': 'bar'
@@ -189,6 +204,8 @@ var arr = [{
 When `"arraysInArrays"` is set to `false`, the following patterns are considered warnings:
 
 ```js
+/*eslint array-bracket-spacing: [1, "always", { arraysInArrays: false }]*/
+
 var arr = [ [ 1, 2 ], 2, 3, 4 ];
 var arr = [ [ 1, 2 ], 2, [ 3, 4 ] ];
 ```
@@ -196,13 +213,15 @@ var arr = [ [ 1, 2 ], 2, [ 3, 4 ] ];
 The following patterns are not warnings:
 
 ```js
+/*eslint array-bracket-spacing: [2, "always", { arraysInArrays: false }]*/
+
 var arr = [[ 1, 2 ], 2, 3, 4 ];
 var arr = [[ 1, 2 ], 2, [ 3, 4 ]];
 ```
 
 ## When Not To Use It
 
-You can turn this rule off if you are not concerned with the consistency of spacing between array brackets.
+You can leave this rule off if you are not concerned with the consistency of spacing between array brackets.
 
 ## Related Rules
 

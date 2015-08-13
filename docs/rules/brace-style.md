@@ -46,8 +46,17 @@ This rule is aimed at enforcing a particular brace style in JavaScript. As such,
 
 The rule takes two options:
 
-1. A string which must be either "1tbs", "stroustrup" or "allman". The default is "1tbs".
-2. An object that further controls the behaviour of this rule. Currently, the only available parameter is `allowSingleLine`, which indicates whether start and end braces may be on the same line.
+1. A string which must be either:
+
+    * `"1tbs"` enforces One True Brace Style (Default)
+    * `"stroustrup"` enforces Stroustup brace style
+    * `"allman"` enforces Allman brace style
+
+2. An object that further controls the behaviour of this rule. Currently, the only available parameter is:
+
+    * `"allowSingleLine"` indicates whether start and end braces may be on the same line (Default `false`)
+
+#### Usage
 
 You can set the style in configuration like this:
 
@@ -60,6 +69,7 @@ You can set the style in configuration like this:
 This is the default setting for this rule and enforces one true brace style. While using this setting, the following patterns are considered warnings:
 
 ```js
+/*eslint brace-style: 1*/
 function foo()
 {
   return true;
@@ -89,6 +99,8 @@ else {
 The following patterns adhere to one true brace style and do not cause warnings:
 
 ```js
+/*eslint brace-style: 2*/
+
 function foo() {
   return true;
 }
@@ -117,6 +129,8 @@ else if (baz) boom();
 With one-line form enabled, the following is also valid:
 
 ```js
+/*eslint brace-style: [2, "1tbs", { "allowSingleLine": true }]*/
+
 function nop() { return; }
 
 if (foo) { bar(); }
@@ -132,6 +146,8 @@ try { somethingRisky(); } catch(e) { handleError(); }
 This enforces Stroustrup style. While using this setting, the following patterns are considered warnings:
 
 ```js
+/*eslint brace-style: [1, "stroustrup"]*/
+
 function foo()
 {
   return true;
@@ -160,6 +176,8 @@ if (foo) {
 The following patterns adhere to Stroustrup style and do not cause warnings:
 
 ```js
+/*eslint brace-style: [2, "stroustrup"]*/
+
 function foo() {
   return true;
 }
@@ -190,6 +208,8 @@ else if (baz) boom();
 With one-line form enabled, the following is also valid:
 
 ```js
+/*eslint brace-style: [2, "stroustrup", { "allowSingleLine": true }]*/
+
 function nop() { return; }
 
 if (foo) { bar(); }
@@ -207,6 +227,8 @@ catch(e) { handleError(); }
 This enforces Allman style. While using this setting, the following patterns are considered warnings:
 
 ```js
+/*eslint brace-style: [1, "allman"]*/
+
 function foo() {
   return true;
 }
@@ -233,6 +255,8 @@ if (foo) {
 The following patterns adhere to Allman style and do not cause warnings:
 
 ```js
+/*eslint brace-style: [2, "allman"]*/
+
 function foo()
 {
   return true;
@@ -269,6 +293,8 @@ else if (baz) boom();
 With one-line form enabled, the following is also valid:
 
 ```js
+/*eslint brace-style: [1, "allman", { "allowSingleLine": true }]*/
+
 function nop() { return; }
 
 if (foo) { bar(); }
@@ -282,7 +308,7 @@ catch(e) { handleError(); }
 
 ## When Not To Use It
 
-If your project will not be using the one true brace style, turn this rule off.
+If you do not want to enforce a consistent brace style, or uses a brace style other than those in this rule's options, turn this rule off.
 
 ## Further Reading
 
