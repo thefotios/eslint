@@ -107,6 +107,10 @@ ruleTester.run("valid-jsdoc", rule, {
             code: "/** foo */ var foo = () => { bar(); };",
             options: [{requireReturn: false}],
             ecmaFeatures: {arrowFunctions: true}
+        },
+        {
+            code: "var fn = function(){}",
+            options: [{required: true, ignoreAnonymous: true}]
         }
     ],
 
@@ -299,6 +303,14 @@ ruleTester.run("valid-jsdoc", rule, {
             errors: [{
                 message: "Unexpected @returns tag; function has no return statement.",
                 type: "Block"
+            }]
+        },
+        {
+            code: "function foo(){}",
+            options: [{required: true}],
+            errors: [{
+                message: "Missing JSDoc for function.",
+                type: "FunctionDeclaration"
             }]
         }
     ]
